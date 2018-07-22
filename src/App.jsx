@@ -1,23 +1,78 @@
 import React, { Component } from 'react';
+import GuestList from './components/GuestList';
 
 class App extends Component {
 
   state = {
+    isFiltered: false,
     guests: [
       {
         name: 'John',
         isConfirmed: true,
+        isEditing: false,
       },
       {
         name: 'Dave',
         isConfirmed: true,
+        isEditing: false,
+      },
+      {
+        name: 'Emma',
+        isConfirmed: false,
+        isEditing: true,
       },
     ], 
   };
 
   getAllGuests = () => this.state.guests.length;
   getConfirmedGuests = () => this.state.guests.map(i => i.isConfirmed === true).length;  
-  getUnconfirmedGuests = () => this.state.guests.map(i => i.isConfirmed === false).length;  
+  getUnconfirmedGuests = () => this.state.guests.map(i => i.isConfirmed === false).length;
+
+  
+  toggleGuestProperty = (guestIndex, property) =>
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (index === guestIndex) {
+          return {
+            ...guest,
+            [property]: !guest[property],
+          }
+        }
+        return guest;
+        // return [
+        //   ...guests,
+        //   guests[guestIndex] = {
+        //     ...guests[guestIndex],
+        //     isConfirmed: !guests[guestIndex].isConfirmed,
+        //   },        
+        // ];    
+      }),
+    });      
+    
+  toggleConfirmation = index =>
+    this.toggleGuestProperty(index, 'isConfirmed');    
+  
+  toggleEditing = index =>
+    this.toggleGuestProperty(index, 'isEditing');    
+  
+  toggleFilter = () => {
+    this.setState({
+      isFiltered: !this.state.isFiltered,
+    });
+  }
+    
+  setNameAt = (name, indexToChange) =>
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (index === indexToChange) {
+          return {
+            ...guest,
+            name
+          }
+        }
+        return guest;
+      }),
+    });
 
   render() {
     return (
@@ -34,7 +89,11 @@ class App extends Component {
         <div>
           <h2>Invitees</h2>
           <label>
-            <input type="checkbox" /> Hide those who haven't responded
+            <input 
+              type="checkbox" 
+              onChange={this.toggleFilter}
+              checked={this.state.isFiltered}
+            /> Only show confirmed
           </label>
         </div>
         <table className="counter">
@@ -53,32 +112,13 @@ class App extends Component {
             </tr>
           </tbody>
         </table>
-        <ul>
-          <li className="pending"><span>Safia</span></li>
-          <li className="responded"><span>Iver</span>
-            <label>
-              <input type="checkbox" checked /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-          <li className="responded">
-            <span>Corrina</span>
-            <label>
-              <input type="checkbox" checked /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-          <li>
-            <span>Joel</span>
-            <label>
-              <input type="checkbox" /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-        </ul>
+        <GuestList 
+          guests={this.state.guests} 
+          toggleConfirmation={this.toggleConfirmation}
+          toggleEditing={this.toggleEditing}
+          setNameAt={this.setNameAt}  
+          isFiltered={this.state.isFiltered}
+        />
       </div>
     </div>
     );
