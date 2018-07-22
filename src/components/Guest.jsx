@@ -19,15 +19,18 @@ const Guest = props =>
             <button onClick={props.handleEditing}>
                 { props.isEditing ? 'save' : 'edit' }
             </button>
-            <button>remove</button>
+            <button
+                onClick={props.handleRemoveGuest}
+            >remove</button>
         </li>;
 
-Guest.prototype = {
+Guest.propTypes = {
     name: propTypes.string.isRequired,
     isConfirmed: propTypes.bool.isRequired,
     isEditing: propTypes.bool.isRequired,
     handleConfirmation: propTypes.func.isRequired,
     handleEditing: propTypes.func.isRequired,
+    handleRemoveGuest: propTypes.func.isRequired,
     setName: propTypes.func.isRequired,
 }
 
