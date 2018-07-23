@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ConfirmFilter from './ConfirmFilter';
 import Counter from './Counter';
-import GuestList from './GuestList/GuestList';
+import GuestList from './GuestList';
 
 const MainContent = props =>
   <div className="main">
