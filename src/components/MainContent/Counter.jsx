@@ -19,7 +19,7 @@ const Counter = props =>
     </tbody>
   </table>;
 
-Counter.PropTypes = {
+Counter.propTypes = {
   numConfirmed: PropTypes.number.isRequired,
   numUnconfirmed: PropTypes.number.isRequired,
   numTotal: PropTypes.number.isRequired,

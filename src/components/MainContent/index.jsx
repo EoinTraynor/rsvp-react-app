@@ -26,7 +26,7 @@ const MainContent = props =>
     />
   </div>
 
-MainContent.PropTypes = {
+MainContent.propTypes = {
   numConfirmed: PropTypes.number.isRequired,
   numUnconfirmed: PropTypes.number.isRequired,
   numTotal: PropTypes.number.isRequired,
@@ -38,7 +38,6 @@ MainContent.PropTypes = {
   removeGuestAt: PropTypes.func.isRequired,
   pendingGuest: PropTypes.string.isRequired,
   toggleFilter: PropTypes.func.isRequired,
-  isFiltered: PropTypes.bool.isRequired,
 }
 
 export default MainContent;

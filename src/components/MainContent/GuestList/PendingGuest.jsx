@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PendingGuest = props => {   
+const PendingGuest = props => {
     if(props.name){
         return(
             <li className="pending">
-                <span>                 
+                <span>
                     {props.name}
-                </span>            
+                </span>
             </li>
         );
     }
     return null;
 }
-PendingGuest.PropTypes = {
+PendingGuest.propTypes = {
     name: PropTypes.string.isRequired,
 }
 

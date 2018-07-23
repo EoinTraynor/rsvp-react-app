@@ -18,7 +18,7 @@ const GuestInputForm = props =>
             </button>
   </form>;
 
-GuestInputForm.PropTypes = {
+GuestInputForm.propTypes = {
   newGuest: PropTypes.string.isRequired,
   handleNewGuestSubmit: PropTypes.func.isRequired,
   handleAddGuest: PropTypes.func.isRequired,

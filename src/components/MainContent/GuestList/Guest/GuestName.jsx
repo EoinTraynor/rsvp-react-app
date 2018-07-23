@@ -18,7 +18,7 @@ const GuestName = props => {
 };
 
 
-GuestName.PropTypes = {
+GuestName.propTypes = {
     isEditing: PropTypes.bool.isRequired,
     handleNameChange: PropTypes.func.isRequired,
 }

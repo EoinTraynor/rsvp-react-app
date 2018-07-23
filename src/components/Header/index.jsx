@@ -12,7 +12,7 @@ const Header = props =>
     />
   </header>;
 
-Header.PropTypes = {
+Header.propTypes = {
   newGuest: PropTypes.string.isRequired,
   handleNewGuestSubmit: PropTypes.func.isRequired,
   handleAddGuest: PropTypes.func.isRequired,
