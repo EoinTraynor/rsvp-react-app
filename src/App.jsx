@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import GuestList from './components/GuestList';
-import Counter from './components/Counter';
+import Header from './components/Header/Header';
+import MainContent from './components/MainContent/MainContent';
 
 class App extends Component {
 
@@ -23,11 +23,11 @@ class App extends Component {
         isConfirmed: false,
         isEditing: false,
       },
-    ], 
+    ],
   };
 
   getAllGuests = () => this.state.guests.length;
-  getConfirmedGuests = () => this.state.guests.filter(i => i.isConfirmed === true).length;  
+  getConfirmedGuests = () => this.state.guests.filter(i => i.isConfirmed === true).length;
   getUnconfirmedGuests = () => this.state.guests.filter(i => i.isConfirmed === false).length;
   toggleGuestProperty = (guestIndex, property) =>
     this.setState({
@@ -44,14 +44,14 @@ class App extends Component {
         //   guests[guestIndex] = {
         //     ...guests[guestIndex],
         //     isConfirmed: !guests[guestIndex].isConfirmed,
-        //   },        
-        // ];    
+        //   },
+        // ];
       }),
-    });          
+    });
   toggleConfirmation = index =>
-    this.toggleGuestProperty(index, 'isConfirmed');    
+    this.toggleGuestProperty(index, 'isConfirmed');
   toggleEditing = index =>
-    this.toggleGuestProperty(index, 'isEditing');    
+    this.toggleGuestProperty(index, 'isEditing');
   toggleFilter = () => {
     this.setState({
       isFiltered: !this.state.isFiltered,
@@ -84,7 +84,7 @@ class App extends Component {
           isConfirmed: false,
           isEditing: false,
         }
-      ],            
+      ],
       newGuest: '',
     });
   }
@@ -103,52 +103,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <header>
-        <h1>RSVP</h1>        
-        <form>
-            <input 
-              type="text" 
-              value={this.state.newGuest}
-              onChange={e => this.newGuestSubmit(e)} 
-              placeholder="Invite Someone" 
-            />
-            <button 
-              type="submit" 
-              name="submit" 
-              value="submit"
-              onClick={e => this.addGuest(e)}
-            >Submit
-            </button>
-        </form>
-      </header>
-      <div className="main">
-        <div>
-          <h2>Invitees</h2>
-          <label>
-            <input 
-              type="checkbox" 
-              onChange={this.toggleFilter}
-              checked={this.state.isFiltered}
-            /> Show only confirmed
-          </label>
-        </div>
-        <Counter
+        <Header
+          newGuest={this.state.newGuest}
+          handleNewGuestSubmit={this.newGuestSubmit}
+          handleAddGuest={this.addGuest}
+        />
+        <MainContent
           numConfirmed={this.getConfirmedGuests()}
           numUnconfirmed={this.getUnconfirmedGuests()}
           numTotal={this.getAllGuests()}
-        />
-        
-        <GuestList 
-          guests={this.state.guests} 
+          guests={this.state.guests}
           toggleConfirmation={this.toggleConfirmation}
           toggleEditing={this.toggleEditing}
-          setNameAt={this.setNameAt}  
+          setNameAt={this.setNameAt}
           isFiltered={this.state.isFiltered}
           removeGuestAt={this.removeGuestAt}
           pendingGuest={this.state.newGuest}
+          toggleFilter={this.toggleFilter}
+          isFiltered={this.state.isFiltered}
         />
       </div>
-    </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const PendingGuest = props => {   
     if(props.name){
@@ -13,8 +13,8 @@ const PendingGuest = props => {
     }
     return null;
 }
-PendingGuest.propTypes = {
-    name: propTypes.string.isRequired,
+PendingGuest.PropTypes = {
+    name: PropTypes.string.isRequired,
 }
 
 export default PendingGuest;
